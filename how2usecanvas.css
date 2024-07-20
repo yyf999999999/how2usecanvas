@@ -1,3 +1,20 @@
+:root{
+    --left-width:128px;
+    --right-width:128px;
+    --dark-grey:#C0C0C0;
+    --light-grey:#E0E0E0;
+}
+body{
+    background:linear-gradient(to right,var(--dark-grey) 0,var(--dark-grey) var(--left-width),
+                var(--light-grey) var(--left-width),var(--light-grey) calc(100% - var(--right-width)),
+                var(--dark-grey) calc(100% - var(--right-width)),var(--dark-grey) 100%);
+    padding:20px;
+    color:#000000;
+}
 h1{
-    color:#0000FF;
+    text-align:center;
+}
+.rank1{
+    margin-left:128px;
+    margin-right:128px;
 }
