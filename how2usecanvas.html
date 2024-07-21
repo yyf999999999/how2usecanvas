@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="styleSheet" href="how2usecanvas.css">
     <title>Canvasの使い方</title>
+    <script>
+        function copyCode(codeId){
+            const codeText=document.getElementById(codeId).innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert('Code copied to clipboard!');
+            }, (err) => {
+                alert('Failed to copy code: ', err);
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="rank1">
@@ -12,35 +22,145 @@
         <div class="rank2">
             <h2>canvasを作る</h2>
             <p>
-                widthで横幅、heightで縦幅を変更できる。
-                cssはcanvasが視覚的に見えるようにするための処理であるため、
-                <strong>border</strong>の部分を<strong>color:black;</strong>などに変えても構わない。
+                <strong>canvasTest.html</strong>と<strong>canvasTest.css</strong>というファイルを作成し、
+                それぞれに次のコードを入力してください。
             </p>
+            <div class="codes">
+                <label for="makeCanvas-html">htmlのコード</label>
+                <button class="code-btn" id="makeCanvas-html" onclick="copyCode('makeCanvas-html-codes')">コピー</button>
+                <pre class="code-text" id="makeCanvas-html-codes"><code>
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="jn"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+        &lt;link rel="styleSheet" href="canvasTest.css"&gt;
+        &lt;title&gt;canvasのテスト&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Canvasのテスト&lt;h1&gt;
+        &lt;canvas width="768px" height="512px" id="canvas"&gt;&lt;/canvas&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+                </code></pre>
+                <br>
+                <label for="makeCanvas-css">cssのコード</label>
+                <button class="code-btn" id="makeCanvas-css" onclick="copyCode('makeCanvas-css-codes')">コピー</button>
+                <pre class="code-text" id="makeCanvas-css-codes"><code>
+    canvas{
+        border:1px solid #000000;
+    }
+                </code></pre>
+            </div>
+            <p>
+                成功すると、画面にcanvasが表示されるはずです。<br>
+                widthで横幅、heightで縦幅を変更できます。<br>
+                cssはcanvasが視覚的に見えるようにするための処理であるため、
+                <strong>border:1px solid #000000;</strong>の部分を
+                <strong>background-color:black;</strong>などに変えても構いません。
+            </p>
+            <div class="screenShot">
+                <img src="image/canvasTest.png" alt="画像が表示できません">
+                <p>画面にcanvasが表示されている様子</p>
+            </div>
         </div>
         <div class="rank2">
             <h2>canvasに四角形を描画する</h2>
             <p>
-                
+                htmlのbodyの最下部に次のようなコードを追加し、
+                <strong>canvasTest.js</strong>というファイルを作成してこのようなコードを入力してください。
             </p>
+            <div class="codes">
+                <label for="drawSquare-html">htmlのコード</label>
+                <button class="code-btn" id="drawSquare-html" onclick="copyCode('drawSquare-html-codes')">コピー</button>
+                <pre class="code-text" id="drawSquare-html-codes"><code>
+    &lt;script type="text/JavaScript" src="canvasTest.js"&gt;&lt;/script&gt;
+                </code></pre>
+                <br>
+                <label for="drawSquare-js">jsのコード</label>
+                <button class="code-btn" id="drawSquare-js" onclick="copyCode('drawSquare-js-codes')">コピー</button>
+                <pre class="code-text" id="drawSquare-js-codes"><code>
+    const canvas=document.getElementById("canvas");
+    const ctx=canvas.getContext("2d");
+
+    ctx.beginPath();
+    ctx.rect(100,100,50,50);
+    ctx.fillStyle="#000000";
+    ctx.fill();
+    ctx.closePath();
+                </code></pre>
+            </div>
+            <p>
+                canvasに四角形が描画出来たら成功です。<br>
+                <strong>document.getElementById("canvas")</strong>;はcanvasというidを持つhtmlの要素を取得するプログラムであり、
+                <strong>ctx.beginPath();</strong>から<strong>ctx.closePath();</strong>の間で四角形を描画しています。<br>
+                <strong>ctx.rect</strong>は第一引数から順に(四角形の左端のx座標,四角形の上端のy座標,四角形の横幅,四角形の縦幅)を入力します。<br>
+                <strong>ctx.fillStyle</strong>は四角形の色を選択でき、<strong>ctx.fill()</strong>で四角形の描画が実行されます。<br>
+                <strong>ctx.fillStyle</strong>を<strong>ctx.strokeStyle</strong>、
+                <strong>ctx.fill()</strong>を<strong>ctx.stroke()</strong>に変更すると、
+                枠線を描画することができます。<strong>ctx.lineWidth=数字</strong>で、枠線の幅を調整できます。<br>
+                fillとstrokeは同時に処理することができ、枠線と中身の色を変えられます。
+            </p>
+            <div class="screenShot">
+                <img src="image/drawSquare.png" alt="画像が表示できません">
+                <p>canvasに四角形が描画されている様子</p>
+            </div>
         </div>
         <div class="rank2">
             <h2>canvasに文字を描画する</h2>
             <p>
-                
+                jsの<strong>ctx.beginPath();</strong>から<strong>ctx.closePath();</strong>の
+                コードを次のように変更してください。
             </p>
+            <div class="codes">
+                <label for="drawLetter-js">jsのコード</label>
+                <button class="code-btn" id="drawLetter-js" onclick="copyCode('drawLetter-js-codes')">コピー</button>
+                <pre class="code-text" id="drawLetter-js-codes"><code>
+    ctx.font="48px serif";
+    ctx.fillStyle="#000000";
+    ctx.fillText("Hello World",10,50);
+                </code></pre>
+            </div>
+            <p>
+                canvasにHello Worldという文字列が描画できたら成功です。<br>
+                <strong>ctx.font</strong>は文字のフォントを設定するコードで、
+                他に<strong>"32px Arial"</strong>なども設定できます。<br>
+                <strong>ctx.fillStyle</strong>は文字の色を選択できます。
+                <strong>ctx.fillText</strong>で文字を入力でき、
+                このとき第一引数から順に(入力する文字,文字のx座標の左端,文字のy座標の下端)と入力します。<br>
+                四角形と違い、y座標の下端を入力しなければならない点に注意してください。<br>
+                文字も四角形と同じように<strong>ctx.fillStyle</strong>を<strong>ctx.strokeStyle</strong>、
+                <strong>ctx.fillText</strong>を<strong>ctx.strokeTest</strong>とすることで
+                文字の枠線が入力できます。
+            </p>
+            <div class="screenShot">
+                <img src="image/drawLetter.png" alt="画像が表示できません">
+                <p>canvasに文字が描画されている様子</p>
+            </div>
         </div>
         <div class="rank2">
             <h2>canvasを使ってゲームを作る</h2>
             <p>
-                
+                これまでで、canvasでの四角形と文字の入力方法を学びました。<br>
+                これを利用すると、簡単なブラウザゲームを作れるようになります。<br>
+                参考に私が作ったゲームのurlを2つ貼っておきます。<br>
+                ぜひ遊んでみてください。
             </p>
+            <div>
+                <a href="https://yyf999999999.github.io/portfolio/actiongame/actiongame.html" target="_blank">
+                    <img src="image/" alt="画像が表示できません">
+                </a>
+                <a href="https://yyf999999999.github.io/typingprot/pages/difficultySelecter.html" target="_blank">
+                    <img src="image/" alt="画像が表示できません">
+                </a>
+            </div>
         </div>
-        <div class="rank2">
+        <!--<div class="rank2">
             <h2>おまけ:canvasに円を描画する</h2>
             <p>
                 
             </p>
-        </div>
+        </div>-->
     </div>
     
 </body>
