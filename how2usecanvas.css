@@ -5,9 +5,12 @@
     --light-grey:#E0E0E0;
 }
 body{
-    background:linear-gradient(to right,var(--dark-grey) 0,var(--dark-grey) var(--left-width),
+    /*background:linear-gradient(to right,var(--dark-grey) 0,var(--dark-grey) var(--left-width),
                 var(--light-grey) var(--left-width),var(--light-grey) calc(100% - var(--right-width)),
-                var(--dark-grey) calc(100% - var(--right-width)),var(--dark-grey) 100%);
+                var(--dark-grey) calc(100% - var(--right-width)),var(--dark-grey) 100%);*/
+    background:linear-gradient(to right,var(--dark-grey) 0,var(--dark-grey) 8.4%,
+    var(--light-grey) 8.4%,var(--light-grey) 91.6%,
+    var(--dark-grey) 91.6%,var(--dark-grey) 100%);
     padding:20px;
     color:#000000;
 }
@@ -33,6 +36,6 @@ h1{
     text-align:center;
 }
 .rank1{
-    margin-left:128px;
-    margin-right:128px;
+    margin-left:8.4%;
+    margin-right:8.4%;
 }
